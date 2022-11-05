@@ -27,4 +27,17 @@ app.post('/api/register', (req, res) => {
     res.json({error_message : 'User already exists'});
 })
 
+
+app.post('/api/login', (req, res) => {
+    const {email, password} = req.body();
+    let result = users.filter((user) => email === user.email && password === user.password);
+
+    if(result.length !== 1) {
+        return res.json({error_message : 'Incorrent Credentials'});
+    }
+    res.json({message : 'Login Successfull!!', 
+                data : {
+                    username : result[0].username}, });
+});
+
 app.listen(PORT, () => console.log(`server listening on port --> ${PORT}`));

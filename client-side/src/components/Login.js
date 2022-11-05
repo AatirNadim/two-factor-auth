@@ -14,6 +14,30 @@ const Login = () => {
         setPassword("");
     }
     const gotoSignupPage = () => navigate('/register');
+
+    const postLoginDetails = () => {
+        fetch('http://localhost:4000/api/login', {
+            method : 'POST',
+            body : JSON.stringify({
+                email, password,
+            }),
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log('in the post login block frontend');
+            if(data.error_message) alert(data.error_message);
+            else {
+                console.log(data.data);
+                localStorage.setItem('username', data.data.username);
+                navigate('/phone/verify');
+            }
+        })
+        .catch((err) => console.error(err))
+    }
+
     return (
         <div className='login__container'>
             <h2>Login</h2>

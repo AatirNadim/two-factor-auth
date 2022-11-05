@@ -8,7 +8,7 @@ const SignUp =() => {
     const navigate = useNavigate();
 
     const postSignUpDetails =() => {
-        fetch('https://localhost:4000/api/register', {
+        fetch('http://localhost:4000/api/register', {
             method : 'POST',
             body : JSON.stringify({email, password, tel, username}),
             headers : {
@@ -16,7 +16,13 @@ const SignUp =() => {
             }
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            console.log(data);
+            if(data.error_message) alert(data.error_message);
+            else {
+                alert(data.message); navigate('/');
+            }
+        })
         .catch((err) => console.error(err));
     }
 
