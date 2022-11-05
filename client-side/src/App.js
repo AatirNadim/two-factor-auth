@@ -12,7 +12,6 @@ const App = () => {
       <Route path = '/register' element = {<Signup/>}/>
       <Route path = '/dashboard' element = {<Dashboard/>}/>
       <Route path = '/phone/verify' element = {<PhoneVerify/>}/>
-
       </Routes>
     </BrowserRouter>
   );
