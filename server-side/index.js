@@ -58,6 +58,9 @@ app.post('/api/login', (req, res) => {
     if(result.length !== 1) {
         return res.json({error_message : 'Incorrent Credentials'});
     }
+
+    code =  generateCode();
+    sendNovuNotification(result[0].tel, code);
     res.json({message : 'Login Successfull!!', 
                 data : {
                     username : result[0].username}, });
