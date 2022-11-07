@@ -66,4 +66,9 @@ app.post('/api/login', (req, res) => {
                     username : result[0].username}, });
 });
 
+app.post('/api/verification', (req, res) => {
+    if(code === req.body.code) return res.json({message : 'login successful with verification'});
+    res.json({error_message : 'login failed; incorrect credentials.'})
+})
+
 app.listen(PORT, () => console.log(`server listening on port --> ${PORT}`));

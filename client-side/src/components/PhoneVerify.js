@@ -16,7 +16,7 @@ const PhoneVerify = () => {
         })
         .then ((res)=> res.json())
         .then((data) => {
-            if(data.error_message) alert(error_message);
+            if(data.error_message) alert(data.error_message);
             else navigate('/dashboard');
 
         })
