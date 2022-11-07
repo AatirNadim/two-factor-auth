@@ -6,14 +6,9 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const val= 3400;
-    const handleSubmit = (e) => {
-        e.preventDefualt();
-        console.log(e);
-        console.log({email, password});
-        setEmail("");
-        setPassword("");
-    }
+    
     const gotoSignupPage = () => navigate('/register');
+    // const gotoSignupPage = () => navigate('../register'); this works, why??
 
     const postLoginDetails = () => {
         fetch('http://localhost:4000/api/login', {
@@ -38,6 +33,14 @@ const Login = () => {
         .catch((err) => console.error(err))
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefualt();
+        console.log(e);
+        postLoginDetails();
+        console.log({email, password});
+        setEmail("");
+        setPassword("");
+    }
     return (
         <div className='login__container'>
             <h2>Login</h2>

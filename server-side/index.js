@@ -2,6 +2,10 @@ const express = require('express')
 console.log(typeof express)
 const cors = require('cors')
 
+const {Novu} =require('@novu/node')
+const novu = new Novu('ffcb48d5d79dbd45604f30add7034e0f');
+
+
 const app = express();
 const PORT = 4000;
 
@@ -10,6 +14,25 @@ app.use(express.json())
 app.use(cors());
 const users = [];
 const generateId = () => Math.random().toString(36).substring(2, 10);
+
+const generateCode = () => Math.random().toString(36).substring(2, 12);
+const sendNovuNotification = async (recipient, verificationCode) => {
+    try {
+        let response = await novu.trigger("sendsms", {
+            to: {
+                subscriberId : recipient, 
+                phone: recipient,
+            },
+            payload: {
+                code : verificationCode,
+            },
+        });
+        console.log({response});
+    }
+    catch(err) {
+        console.error(err);
+    }
+};
 
 app.get('/api', (req, res) => {
     res.json({ message: 'Hello from the server'});

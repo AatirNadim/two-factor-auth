@@ -29,6 +29,7 @@ const SignUp =() => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(e);
+        postSignUpDetails();
         console.log({email, username, tel, password});
         setEmail(''); setPassword(''); setTel(''); setUsername('');
     }
@@ -36,8 +37,8 @@ const SignUp =() => {
     return (
         <div className="signup__container">
             <h2>Sign Up</h2>
-            <label htmlFor="email">Email Address</label>
             <form className="signup_form" onSubmit={handleSubmit}>
+                <label htmlFor="email">Email Address</label>
                 <input
                 type='email' id= 'email' name = 'email' value = {email}
                 required 
